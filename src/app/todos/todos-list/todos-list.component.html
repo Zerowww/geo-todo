@@ -1,1 +1,11 @@
-<p>todos-list works!</p>;
+<p>
+  todos-list works!
+</p>
+
+<mat-list>
+  <mat-list-item #todos *ngFor="let todo of todos">
+    <mat-checkbox color="primary" type="checkbox" [labelPosition]="'before'">
+        {{ todo.title }}
+    </mat-checkbox>
+  </mat-list-item>
+</mat-list>
