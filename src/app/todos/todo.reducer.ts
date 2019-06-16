@@ -27,9 +27,12 @@ export const initialState: TodosState = adapter.getInitialState({
 
 export function todosReducer(state = initialState, action: TodoActions): TodosState {
   switch (action.type) {
-    case TodoActionTypes.LoadTodosSuccess:
+    case TodoActionTypes.LoadTodoCollectionSuccess:
       return adapter.addAll(action.payload.todos, {...state, allTodosLoaded: true});
+    case TodoActionTypes.LoadTodoSuccess:
+      return adapter.addOne(action.payload.todo, state);
     case TodoActionTypes.UpdateTodo:
+    case TodoActionTypes.UpdateTodoDetail:
       return adapter.updateOne(action.payload.todo, state);
     default:
       return state;
