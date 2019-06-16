@@ -1,10 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
+import {TodosPageComponent} from './todos-page.component';
+
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./todos-page/todos-page.module').then(m => m.TodosPageModule),
+    component: TodosPageComponent,
+    pathMatch: 'full',
   },
 ];
 
@@ -12,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TodosRoutingModule {}
+export class TodosPageRoutingModule {}
