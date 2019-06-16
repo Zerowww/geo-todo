@@ -1,5 +1,5 @@
-import {InMemoryDbService} from 'angular-in-memory-web-api';
-import {Todo} from 'src/app/shared/models/todo.model';
+import { InMemoryDbService } from 'angular-in-memory-web-api';
+import { Todo } from 'src/app/shared/models/todo.model';
 
 export class MockTodos implements InMemoryDbService {
   createDb() {
@@ -9,28 +9,28 @@ export class MockTodos implements InMemoryDbService {
         state: false,
         title: 'Learn how to surf',
         description: `Without diying from shark attacks (if possible)`,
-        creationDate: new Date(),
+        creationDate: new Date(2019, 5, 25),
       },
       {
         id: 2,
-        state: false,
+        state: true,
         title: 'Go to the cinema',
         description: `Let's watch Avengers: EndGame (when we are done working)`,
-        creationDate: new Date(),
+        creationDate: new Date(2019, 6, 28),
       },
       {
         id: 3,
-        state: true,
+        state: false,
         title: 'Sing a song',
         description: `Singin' in the rain`,
-        creationDate: new Date(),
+        creationDate: new Date(2018, 4, 19),
       },
       {
         id: 4,
         state: true,
         title: 'Play Fortnite',
         description: `Nahhh, just kidding, I'm not twelve years old !`,
-        creationDate: new Date(),
+        creationDate: new Date(2018, 7, 27),
       },
     ];
     return {todos};
