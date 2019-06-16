@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Todo } from 'src/app/shared/models/todo.model';
+
+import { TodosRequested } from '../todo.actions';
+import { TodosState } from '../todo.reducer';
+import { selectAllTodos } from '../todo.selectors';
 
 @Component({
   selector: 'geo-todos-page',
@@ -6,7 +13,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./todos-page.component.css'],
 })
 export class TodosPageComponent implements OnInit {
-  constructor() {}
+  public allTodos$: Observable<Todo[]>;
 
-  ngOnInit() {}
+  constructor(private store: Store<TodosState>) {}
+
+  ngOnInit() {
+    this.store.dispatch(new TodosRequested());
+
+    this.allTodos$ = this.store.pipe(select(selectAllTodos));
+  }
 }
