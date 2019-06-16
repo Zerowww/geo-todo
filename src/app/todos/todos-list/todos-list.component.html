@@ -4,7 +4,7 @@
 
 <mat-list>
   <mat-list-item #todos *ngFor="let todo of todos">
-    <mat-checkbox color="primary" type="checkbox" [labelPosition]="'before'" [(ngModel)]="todo.state">
+    <mat-checkbox color="primary" type="checkbox" [labelPosition]="'before'" [checked]="todo.state">
         {{ todo.title }}
     </mat-checkbox>
   </mat-list-item>
