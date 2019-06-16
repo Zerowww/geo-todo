@@ -7,9 +7,18 @@ export interface TodosState extends EntityState<Todo> {
   allTodosLoaded: boolean;
 }
 
+function sortByStateThenDateCreation(t1: Todo, t2: Todo): number {
+  if (t1.state !== t2.state) {
+    return t1.state ? 1 : -1;
+  } else {
+    return new Date(t1.creationDate).getTime() - new Date(t2.creationDate).getTime();
+  }
+}
+
 // prettier-ignore
 export const adapter: EntityAdapter<Todo> = createEntityAdapter<Todo>({
-  selectId: (todo: Todo) => todo.id
+  selectId: (todo: Todo) => todo.id,
+  sortComparer: sortByStateThenDateCreation
 });
 
 export const initialState: TodosState = adapter.getInitialState({
@@ -20,6 +29,8 @@ export function todosReducer(state = initialState, action: TodoActions): TodosSt
   switch (action.type) {
     case TodoActionTypes.LoadTodosSuccess:
       return adapter.addAll(action.payload.todos, {...state, allTodosLoaded: true});
+    case TodoActionTypes.UpdateTodo:
+      return adapter.updateOne(action.payload.todo, state);
     default:
       return state;
   }
