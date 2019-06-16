@@ -8,11 +8,15 @@ import { AppState } from '../reducers';
 import { Todo } from '../shared/models/todo.model';
 import { TodosService } from '../shared/services/todos.service';
 import {
-  LoadTodosFailure,
-  LoadTodosSuccess,
+  LoadTodoCollectionFailure,
+  LoadTodoCollectionSuccess,
+  LoadTodoFailure,
+  LoadTodoSuccess,
   TodoActionTypes,
-  TodosRequested,
+  TodoCollectionRequested,
+  TodoRequested,
   UpdateTodo,
+  UpdateTodoDetail,
   UpdateTodoFailure,
   UpdateTodoSuccess,
 } from './todo.actions';
@@ -22,20 +26,39 @@ import { selectAllTodosLoaded, selectTodoById } from './todo.selectors';
 export class TodoEffects {
 
   @Effect()
-  loadTodos$: Observable<Action> = this.actions$.pipe(
-    ofType<TodosRequested>(TodoActionTypes.TodosRequested),
+  loadTodoCollection$: Observable<Action> = this.actions$.pipe(
+    ofType<TodoCollectionRequested>(TodoActionTypes.TodoCollectionRequested),
     withLatestFrom(this.store.pipe(select(selectAllTodosLoaded))),
     filter(([action, allTodosLoaded]) => !allTodosLoaded),
     mergeMap(() => this.todosService.findAllTodos().pipe(
-      map((allTodos: Todo[]) => new LoadTodosSuccess({todos: allTodos})),
-      catchError(error => of(new LoadTodosFailure({error})))
+      map((allTodos: Todo[]) => new LoadTodoCollectionSuccess({todos: allTodos})),
+      catchError(error => of(new LoadTodoCollectionFailure({error})))
     ))
   );
+
+  @Effect()
+  loadTodo$: Observable<Action> = this.actions$.pipe(
+    ofType<TodoRequested>(TodoActionTypes.TodoRequested),
+    mergeMap(action => this.todosService.findTodo(action.payload.todoId).pipe(
+      map((todo: Todo) => new LoadTodoSuccess({todo})),
+      catchError(error => of(new LoadTodoFailure({error}))
+    ))
+  ));
 
   @Effect()
   updateTodo$: Observable<Action> = this.actions$.pipe(
     ofType(TodoActionTypes.UpdateTodo),
     mergeMap((action: UpdateTodo) => this.store.pipe(select(selectTodoById(+action.payload.todo.id)))),
+    switchMap((todo: Todo) => this.todosService.updateTodo(todo).pipe(
+      map((updatedTodo: Todo) => new UpdateTodoSuccess({todo: updatedTodo})),
+      catchError(error => of(new UpdateTodoFailure({error}))
+    ))
+  ));
+
+  @Effect()
+  updateTodoDetail$: Observable<Action> = this.actions$.pipe(
+    ofType(TodoActionTypes.UpdateTodoDetail),
+    mergeMap((action: UpdateTodoDetail) => this.store.pipe(select(selectTodoById(+action.payload.todo.id)))),
     switchMap((todo: Todo) => this.todosService.updateTodo(todo).pipe(
       map((updatedTodo: Todo) => new UpdateTodoSuccess({todo: updatedTodo})),
       catchError(error => of(new UpdateTodoFailure({error}))
