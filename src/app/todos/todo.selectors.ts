@@ -15,3 +15,14 @@ export const selectAllTodosLoaded = createSelector(
   selectTodosState,
   todosState => todosState.allTodosLoaded
 );
+
+export const selectTodosEntities = createSelector(
+  selectTodosState,
+  fromTodo.selectEntities
+);
+
+export const selectTodoById = (todoId: number) =>
+  createSelector(
+    selectTodosEntities,
+    todoEntities => todoEntities[todoId]
+  );
