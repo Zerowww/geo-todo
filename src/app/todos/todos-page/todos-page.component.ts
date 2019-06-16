@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Todo } from 'src/app/shared/models/todo.model';
 
-import { TodosRequested } from '../todo.actions';
+import { TodoCollectionRequested } from '../todo.actions';
 import { TodosState } from '../todo.reducer';
 import { selectAllTodos } from '../todo.selectors';
 
@@ -18,7 +18,7 @@ export class TodosPageComponent implements OnInit {
   constructor(private store: Store<TodosState>) {}
 
   ngOnInit() {
-    this.store.dispatch(new TodosRequested());
+    this.store.dispatch(new TodoCollectionRequested());
 
     this.allTodos$ = this.store.pipe(select(selectAllTodos));
   }
