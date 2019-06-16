@@ -4,26 +4,41 @@ import { Action } from '@ngrx/store';
 import { Todo } from '../shared/models/todo.model';
 
 export enum TodoActionTypes {
-  TodosRequested = '[Todo Page] Todos Requested',
-  LoadTodosSuccess = '[Todo API] Load Todos Success',
-  LoadTodosFailure = '[Todo API] Load Todos Failure',
+  TodoCollectionRequested = '[Todo Page] Todo Collection Requested',
+  LoadTodoCollectionSuccess = '[Todo API] Load Todo Collection Success',
+  LoadTodoCollectionFailure = '[Todo API] Load Todo Collection Failure',
+
+  TodoRequested = '[Todo Detail Page] Todo Requested',
+  LoadTodoSuccess = '[Todo API] Load Todo Success',
+  LoadTodoFailure = '[Todo API] Load Todo Failure',
 
   UpdateTodo = '[Todo Page] Todo Update',
+  UpdateTodoDetail = '[Todo Detail Page] Todo Update',
   UpdateTodoSuccess = '[Todo API] Update Todo Success',
   UpdateTodoFailure = '[Todo API] Update Todos Failure',
 }
 
-export class TodosRequested implements Action {
-  readonly type = TodoActionTypes.TodosRequested;
+export class TodoCollectionRequested implements Action {
+  readonly type = TodoActionTypes.TodoCollectionRequested;
 }
-
-export class LoadTodosSuccess implements Action {
-  readonly type = TodoActionTypes.LoadTodosSuccess;
+export class LoadTodoCollectionSuccess implements Action {
+  readonly type = TodoActionTypes.LoadTodoCollectionSuccess;
   constructor(public payload: { todos: Todo[] }) { }
 }
-
-export class LoadTodosFailure implements Action {
-  readonly type = TodoActionTypes.LoadTodosFailure;
+export class LoadTodoCollectionFailure implements Action {
+  readonly type = TodoActionTypes.LoadTodoCollectionFailure;
+  constructor(public payload: { error: any }) { }
+}
+export class TodoRequested implements Action {
+  readonly type = TodoActionTypes.TodoRequested;
+  constructor(public payload: { todoId: number }) { }
+}
+export class LoadTodoSuccess implements Action {
+  readonly type = TodoActionTypes.LoadTodoSuccess;
+  constructor(public payload: { todo: Todo }) { }
+}
+export class LoadTodoFailure implements Action {
+  readonly type = TodoActionTypes.LoadTodoFailure;
   constructor(public payload: { error: any }) { }
 }
 
@@ -31,16 +46,28 @@ export class UpdateTodo implements Action {
   readonly type = TodoActionTypes.UpdateTodo;
   constructor(public payload: { todo: Update<Todo> }) { }
 }
-
+export class UpdateTodoDetail implements Action {
+  readonly type = TodoActionTypes.UpdateTodoDetail;
+  constructor(public payload: { todo: Update<Todo> }) { }
+}
 export class UpdateTodoSuccess implements Action {
   readonly type = TodoActionTypes.UpdateTodoSuccess;
   constructor(public payload: { todo: Todo }) { }
 }
-
 export class UpdateTodoFailure implements Action {
   readonly type = TodoActionTypes.UpdateTodoFailure;
   constructor(public payload: { error: any }) { }
 }
 
-export type TodoActions = TodosRequested | LoadTodosSuccess | LoadTodosFailure | UpdateTodo | UpdateTodoSuccess | UpdateTodoFailure;
+export type TodoActions =
+  TodoCollectionRequested |
+  LoadTodoCollectionSuccess |
+  LoadTodoCollectionFailure |
+  TodoRequested |
+  LoadTodoSuccess |
+  LoadTodoFailure |
+  UpdateTodo |
+  UpdateTodoDetail |
+  UpdateTodoSuccess |
+  UpdateTodoFailure;
 
