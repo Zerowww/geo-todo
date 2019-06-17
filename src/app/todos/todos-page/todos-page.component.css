@@ -1,0 +1,7 @@
+.todos-page-body {
+  width: 100%;
+  height: 100vh;
+  background: url('../../../assets/pool-party.jpeg') no-repeat;
+  background-size: cover;
+  text-align: center;
+}

@@ -1,7 +1,4 @@
-<p>
-  todo-creation-dialog works!
-</p>
-<h2 mat-dialog-title>Create your new todo</h2>
+<h2 mat-dialog-title class="text-center font-weight-bold mat-background-primary">Create your new todo</h2>
 
 <mat-dialog-content [formGroup]="todoForm">
   <mat-form-field>
@@ -25,9 +22,8 @@
   <button class="mat-raised-button" (click)="close()">
     Close
   </button>
-  <button class="mat-raised-button mat-primary" [disabled]="todoForm.pristine || todoForm.invalid" (click)="save()">
+  <button class="mat-raised-button mat-primary ml-auto font-weight-bold"
+    [disabled]="todoForm.pristine || todoForm.invalid" (click)="save()">
     Save
   </button>
-
-  <button class="mat-raised-button mat-primary" (click)="logForm(todoForm)" >test</button>
 </mat-dialog-actions>

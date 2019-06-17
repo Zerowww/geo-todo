@@ -30,19 +30,11 @@ export class TodoCreationDialogComponent {
 
   public save(): void {
     const todo = this.todoForm.value;
-
-    console.log(todo);
-
     this.store.dispatch(new CreateTodo({ todo }));
-
     this.dialogRef.close();
   }
 
   public close(): void {
     this.dialogRef.close();
-  }
-
-  public logForm(todoForm): void {
-    console.log(todoForm);
   }
 }

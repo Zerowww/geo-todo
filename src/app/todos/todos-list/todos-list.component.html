@@ -1,12 +1,10 @@
-<p>
-  todos-list works!
-</p>
-
-<mat-list>
-  <mat-list-item #todos *ngFor="let todo of todos">
-    <mat-checkbox #matTodo (change)="onChange(todo, matTodo)" [class.state-done]="todo.state" color="primary" type="checkbox" [labelPosition]="'before'" [checked]="todo.state">
-        {{ todo.title }}
+<mat-list dense class="bg-light rounded shadow">
+  <mat-list-item class="p-2" #todos *ngFor="let todo of todos">
+    <mat-checkbox class="pr-3" (change)="onChange(todo)" [class.state-done]="todo.state" color="primary" type="checkbox"
+      labelPosition="before" [checked]="todo.state">
+      {{ todo.title }}
     </mat-checkbox>
-    <button mat-raised-button [routerLink]="['/todos', todo.id]" color="primary">More</button>
+    <button class="font-weight-bold ml-auto" mat-raised-button [routerLink]="['/todos', todo.id]"
+      color="primary">Edit</button>
   </mat-list-item>
 </mat-list>

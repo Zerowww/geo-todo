@@ -1,2 +1,10 @@
-<p>home-page works!</p>;
-<button mat-raised-button [routerLink]="['/todos']" color="primary">Todos</button>
+<div class="home-body">
+  <div class="d-flex justify-content-center home-card">
+    <mat-card>
+      <section class="mat-typography text-center">
+        <h1 class="py-2">Welcome</h1>
+      </section>
+      <button mat-raised-button [routerLink]="['/todos']" color="primary">Manage todos</button>
+    </mat-card>
+  </div>
+</div>

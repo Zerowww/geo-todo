@@ -1,16 +1,14 @@
-<p>
-  todo-detail works!
-</p>
-
-
-<form [formGroup]="todoForm" (ngSubmit)="submit()">
-  <mat-form-field [floatLabel]="'auto'">
+<form class="bg-light rounded shadow p-3" [formGroup]="todoForm" (ngSubmit)="submit()">
+  <mat-form-field floatLabel="auto">
     <input #title matInput placeholder="Title" formControlName="title" required>
     <mat-error *ngIf="title.errors?.required">Title cannot be empty</mat-error>
   </mat-form-field>
-  <mat-form-field [floatLabel]="'auto'">
+  <mat-form-field floatLabel="auto">
     <textarea placeholder="Description" matInput formControlName="description" matTextareaAutosize></textarea>
   </mat-form-field>
-  <button mat-raised-button [routerLink]="['/todos']" color="primary">Go back</button>
-  <button mat-raised-button type="submit" [disabled]="todoForm.pristine || todoForm.invalid" color="primary">Save</button>
+  <div class="d-flex">
+    <button mat-raised-button [routerLink]="['/todos']" color="primary">Go back</button>
+    <button mat-raised-button class="ml-auto" type="submit" [disabled]="todoForm.pristine || todoForm.invalid"
+      color="primary">Save</button>
+  </div>
 </form>
