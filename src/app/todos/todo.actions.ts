@@ -16,6 +16,10 @@ export enum TodoActionTypes {
   UpdateTodoDetail = '[Todo Detail Page] Todo Update',
   UpdateTodoSuccess = '[Todo API] Update Todo Success',
   UpdateTodoFailure = '[Todo API] Update Todos Failure',
+
+  CreateTodo = '[Todo Creation Dialog] Todo Create',
+  CreateTodoSuccess = '[Todo API] Create Todo Success',
+  CreateTodoFailure = '[Todo API] Create Todos Failure',
 }
 
 export class TodoCollectionRequested implements Action {
@@ -58,6 +62,18 @@ export class UpdateTodoFailure implements Action {
   readonly type = TodoActionTypes.UpdateTodoFailure;
   constructor(public payload: { error: any }) { }
 }
+export class CreateTodo implements Action {
+  readonly type = TodoActionTypes.CreateTodo;
+  constructor(public payload: { todo: Todo }) { }
+}
+export class CreateTodoSuccess implements Action {
+  readonly type = TodoActionTypes.CreateTodoSuccess;
+  constructor(public payload: { todo: Todo }) { }
+}
+export class CreateTodoFailure implements Action {
+  readonly type = TodoActionTypes.CreateTodoFailure;
+  constructor(public payload: { error: any }) { }
+}
 
 export type TodoActions =
   TodoCollectionRequested |
@@ -69,5 +85,8 @@ export type TodoActions =
   UpdateTodo |
   UpdateTodoDetail |
   UpdateTodoSuccess |
-  UpdateTodoFailure;
+  UpdateTodoFailure |
+  CreateTodo |
+  CreateTodoSuccess |
+  CreateTodoFailure;
 
