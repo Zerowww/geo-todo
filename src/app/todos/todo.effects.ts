@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, select, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { catchError, filter, map, mergeMap, switchMap, withLatestFrom } from 'rxjs/operators';
+import { catchError, filter, map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { AppState } from '../reducers';
 import { Todo } from '../shared/models/todo.model';
@@ -77,7 +78,15 @@ export class TodoEffects {
     ))
   ));
 
+  @Effect({dispatch: false})
+  loadTodoFailure$ = this.actions$.pipe(
+    ofType<LoadTodoFailure>(TodoActionTypes.LoadTodoFailure),
+    tap(() => {
+      this.router.navigateByUrl('/todos');
+    })
+  );
+
   constructor(private actions$: Actions, private todosService: TodosService,
-    private store: Store<AppState>) {}
+    private store: Store<AppState>, private router: Router) {}
 
 }
