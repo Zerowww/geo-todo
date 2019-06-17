@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-import { TodosDetailComponent } from './todos-detail.component';
+import { TodoDetailComponent } from './todo-detail.component';
 
 @NgModule({
-  declarations: [TodosDetailComponent],
+  declarations: [TodoDetailComponent],
   imports: [SharedModule, ReactiveFormsModule],
-  exports: [TodosDetailComponent],
+  exports: [TodoDetailComponent],
 })
-export class TodosDetailModule {}
+export class TodoDetailModule {}

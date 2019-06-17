@@ -9,11 +9,11 @@ import { UpdateTodoDetail } from '../todo.actions';
 import { TodosState } from '../todo.reducer';
 
 @Component({
-  selector: 'geo-todos-detail',
-  templateUrl: './todos-detail.component.html',
-  styleUrls: ['./todos-detail.component.css']
+  selector: 'geo-todo-detail',
+  templateUrl: './todo-detail.component.html',
+  styleUrls: ['./todo-detail.component.css']
 })
-export class TodosDetailComponent implements OnInit {
+export class TodoDetailComponent implements OnInit {
 
   @Input()
   public todo: Todo;
