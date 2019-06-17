@@ -1,3 +1,16 @@
+### Task list
+- Redirect on LoadTodoFailure
+- More advanced testing globally (didn't check everywhere for hard F5 refresh, direct url access, out of the box thinking)
+- Build user interface
+- Automated tests
+- Display errors/success with material snackbar
+- Sort by status then by latestModificationDate instead of creationDate
+- Refactor to use createActions, createReducer, createEffect
+- Filter by status (display only done etc etc)
+- Add authentication
+- Add some angular animations
+- Add more status
+
 # GeoTodo
 
 # Context
