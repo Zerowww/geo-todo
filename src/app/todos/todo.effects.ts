@@ -8,6 +8,9 @@ import { AppState } from '../reducers';
 import { Todo } from '../shared/models/todo.model';
 import { TodosService } from '../shared/services/todos.service';
 import {
+  CreateTodo,
+  CreateTodoFailure,
+  CreateTodoSuccess,
   LoadTodoCollectionFailure,
   LoadTodoCollectionSuccess,
   LoadTodoFailure,
@@ -62,6 +65,15 @@ export class TodoEffects {
     switchMap((todo: Todo) => this.todosService.updateTodo(todo).pipe(
       map((updatedTodo: Todo) => new UpdateTodoSuccess({todo: updatedTodo})),
       catchError(error => of(new UpdateTodoFailure({error}))
+    ))
+  ));
+
+  @Effect()
+  createTodo$: Observable<Action> = this.actions$.pipe(
+    ofType(TodoActionTypes.CreateTodo),
+    mergeMap((action: CreateTodo) => this.todosService.createTodo(action.payload.todo).pipe(
+      map((createdTodo: Todo) => new CreateTodoSuccess({todo: createdTodo})),
+      catchError(error => of(new CreateTodoFailure({error}))
     ))
   ));
 
