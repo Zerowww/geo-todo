@@ -1,4 +1,9 @@
 <p>
   todos-page works!
 </p>
+
 <geo-todos-list [todos]="allTodos$ | async"></geo-todos-list>
+
+<button mat-mini-fab (click)="createTodo()">
+  Add
+</button>
