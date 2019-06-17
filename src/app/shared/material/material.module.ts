@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -16,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     MatInputModule,
     MatIconModule,
+    MatDialogModule,
   ],
   exports: [
     MatListModule,
@@ -25,6 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     MatInputModule,
     MatIconModule,
+    MatDialogModule,
   ],
 })
 export class MaterialModule {}
