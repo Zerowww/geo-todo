@@ -4,6 +4,7 @@
 - Build user interface
 - Automated tests
 - Display errors/success with material snackbar
+- Loading indicators
 - Sort by status then by latestModificationDate instead of creationDate
 - Refactor to use createActions, createReducer, createEffect
 - Filter by status (display only done etc etc)
