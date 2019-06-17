@@ -29,6 +29,8 @@ export function todosReducer(state = initialState, action: TodoActions): TodosSt
   switch (action.type) {
     case TodoActionTypes.LoadTodoCollectionSuccess:
       return adapter.addAll(action.payload.todos, {...state, allTodosLoaded: true});
+    case TodoActionTypes.CreateTodoSuccess:
+      return adapter.upsertOne(action.payload.todo, state);
     case TodoActionTypes.LoadTodoSuccess:
       return adapter.addOne(action.payload.todo, state);
     case TodoActionTypes.UpdateTodo:
