@@ -1,7 +1,5 @@
 ### Task list
-- Redirect on LoadTodoFailure
 - More advanced testing globally (didn't check everywhere for hard F5 refresh, direct url access, out of the box thinking)
-- Build user interface
 - Automated tests
 - Display errors/success with material snackbar
 - Loading indicators
