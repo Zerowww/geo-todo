@@ -11,7 +11,7 @@ function sortByStateThenDateCreation(t1: Todo, t2: Todo): number {
   if (t1.state !== t2.state) {
     return t1.state ? 1 : -1;
   } else {
-    return new Date(t1.creationDate).getTime() - new Date(t2.creationDate).getTime();
+    return new Date(t2.creationDate).getTime() - new Date(t1.creationDate).getTime();
   }
 }
 
