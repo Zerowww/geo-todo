@@ -1,5 +1,6 @@
 ### Task list
 - Loading indicators
+- Delete todos
 - More advanced manual testing
 - Sort by status then by latestModificationDate instead of creationDate
 - Automated tests
