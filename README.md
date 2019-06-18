@@ -1,4 +1,5 @@
 ### Task list
+- Change todo-detail layout
 - Loading indicators
 - Delete todos
 - More advanced manual testing
