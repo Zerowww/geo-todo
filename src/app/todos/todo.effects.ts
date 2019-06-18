@@ -8,6 +8,7 @@ import { catchError, filter, map, mergeMap, switchMap, tap, withLatestFrom } fro
 import { AppState } from '../reducers';
 import { Todo } from '../shared/models/todo.model';
 import { TodosService } from '../shared/services/todos.service';
+import { toast } from '../shared/utils';
 import {
   CreateTodo,
   CreateTodoFailure,
@@ -79,10 +80,100 @@ export class TodoEffects {
   ));
 
   @Effect({dispatch: false})
+  loadTodoSuccess$ = this.actions$.pipe(
+    ofType<LoadTodoSuccess>(TodoActionTypes.LoadTodoSuccess),
+    tap((action: LoadTodoSuccess) => {
+      toast.fire({
+        type: 'success',
+        title: `Successfuly fetched todo
+        "${action.payload.todo.title}" from database`
+      });
+    })
+  );
+
+  @Effect({dispatch: false})
   loadTodoFailure$ = this.actions$.pipe(
     ofType<LoadTodoFailure>(TodoActionTypes.LoadTodoFailure),
-    tap(() => {
-      this.router.navigateByUrl('/todos');
+    tap((action: LoadTodoFailure) => {
+      console.error(action.payload.error);
+      toast.fire({
+        type: 'error',
+        title: 'Unable to find todo in database, you are beeing redirected to todo list',
+        position: 'top'
+      });
+      setTimeout(() => {
+        this.router.navigateByUrl('/todos');
+      }, 2500);
+    })
+  );
+
+  @Effect({dispatch: false})
+  updateTodoSuccess$ = this.actions$.pipe(
+    ofType<UpdateTodoSuccess>(TodoActionTypes.UpdateTodoSuccess),
+    tap((action: UpdateTodoSuccess) => {
+      toast.fire({
+        type: 'success',
+        title: `Successfuly updated todo informations
+        "${action.payload.todo.title}" in database`,
+      });
+    })
+  );
+
+  @Effect({dispatch: false})
+  updateTodoFailure$ = this.actions$.pipe(
+    ofType<UpdateTodoFailure>(TodoActionTypes.UpdateTodoFailure),
+    tap((action: UpdateTodoFailure) => {
+      console.error(action.payload.error);
+      toast.fire({
+        type: 'error',
+        title: 'Unable to update todo informations in database'
+      });
+    })
+  );
+
+  @Effect({dispatch: false})
+  createTodoSuccess$ = this.actions$.pipe(
+    ofType<CreateTodoSuccess>(TodoActionTypes.CreateTodoSuccess),
+    tap((action: CreateTodoSuccess) => {
+      toast.fire({
+        type: 'success',
+        title: `Successfuly created todo "${action.payload.todo.title}"`,
+      });
+    })
+  );
+
+  @Effect({dispatch: false})
+  createTodoFailure$ = this.actions$.pipe(
+    ofType<CreateTodoFailure>(TodoActionTypes.CreateTodoFailure),
+    tap((action: CreateTodoFailure) => {
+      console.error(action.payload.error);
+      toast.fire({
+        type: 'error',
+        title: 'Unable to create todo'
+      });
+    })
+  );
+
+  @Effect({dispatch: false})
+  loadTodoCollectionSuccess$ = this.actions$.pipe(
+    ofType<LoadTodoCollectionSuccess>(TodoActionTypes.LoadTodoCollectionSuccess),
+    tap((action: LoadTodoCollectionSuccess) => {
+      toast.fire({
+        type: 'success',
+        title: `Successfuly fetched all ${action.payload.todos.length} todos from database`
+      });
+    })
+  );
+
+  @Effect({dispatch: false})
+  loadTodoCollectionFailure$ = this.actions$.pipe(
+    ofType<LoadTodoCollectionFailure>(TodoActionTypes.LoadTodoCollectionFailure),
+    tap((action: LoadTodoCollectionFailure) => {
+      console.error(action.payload.error);
+      toast.fire({
+        type: 'error',
+        title: 'Unable to fetch todo collection from database'
+      });
     })
   );
 
