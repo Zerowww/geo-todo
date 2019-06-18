@@ -1,9 +1,8 @@
 ### Task list
-- More advanced testing globally (didn't check everywhere for hard F5 refresh, direct url access, out of the box thinking)
-- Automated tests
-- Display errors/success with material snackbar
 - Loading indicators
+- More advanced manual testing
 - Sort by status then by latestModificationDate instead of creationDate
+- Automated tests
 - Refactor to use createActions, createReducer, createEffect
 - Filter by status (display only done etc etc)
 - Add authentication
